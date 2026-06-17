@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Brand Colours */
+  --color-cream: #FAF5EB;
+  --color-parchment: #F0E6D0;
+  --color-parchment-dark: #E8D5B0;
+  --color-gold: #D4930A;
+  --color-gold-light: #F5B731;
+  --color-gold-pale: #FDF3D0;
+  --color-forest: #2D5016;
+  --color-forest-light: #3D6B20;
+  --color-brown: #5C3317;
+  --color-brown-light: #7A4520;
+  --color-dark: #1C1209;
+  --color-dark-surface: #2A1A08;
+
+  /* Typography */
+  --font-display: var(--font-playfair);
+  --font-sans: var(--font-inter);
+
+  /* Spacing */
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-brown);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   TYPOGRAPHY UTILITIES
+   ============================================ */
+.font-display {
+  font-family: var(--font-playfair), Georgia, serif;
+}
+
+/* ============================================
+   CUSTOM ANIMATIONS
+   ============================================ */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 147, 10, 0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(212, 147, 10, 0); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-gold {
+  animation: pulse-gold 2s ease-in-out infinite;
+}
+
+/* ============================================
+   SPICE INDICATOR
+   ============================================ */
+.spice-pip {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* ============================================
+   HERO PARALLAX
+   ============================================ */
+.hero-image-wrap {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-parchment);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+  border-radius: 3px;
+}
+
+/* ============================================
+   SELECTION
+   ============================================ */
+::selection {
+  background: var(--color-gold-light);
+  color: var(--color-dark);
+}
+
+/* ============================================
+   FORM INPUT FOCUS RING
+   ============================================ */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+}
