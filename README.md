@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PattySource — Premium Jamaican Patty Wholesale
 
-## Getting Started
+A premium, mobile-first B2B website for **PattySource**, a Jamaican patty wholesale brand supplying pubs, restaurants, cafés, convenience stores, and event organisers across the UK.
 
-First, run the development server:
+## 🌐 Live Site
+
+> Deployed on Vercel — link added after first deploy.
+
+## 🚀 Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Styling:** Tailwind CSS v4 (CSS-first config)
+- **Animations:** Framer Motion
+- **Language:** TypeScript
+- **Fonts:** Playfair Display + Inter (Google Fonts)
+
+## 📄 Pages & Sections
+
+| Section | Description |
+|---|---|
+| Hero | Full-screen parallax image, animated headline, dual CTAs |
+| About | Split layout with brand story and stats |
+| Products | 5 animated product cards with spice indicators |
+| Why Choose Us | 6 benefit cards on dark background |
+| Demo Basket | Interactive order builder with WhatsApp CTA |
+| Testimonials | Animated carousel with 3 stockist reviews |
+| Become a Stockist | Business enquiry form with success state |
+| Footer | Links, contact, social media |
+
+## 🏃 Running Locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# → http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🏗️ Building for Production
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📦 Deploying to Vercel
 
-## Learn More
+1. Push this repo to GitHub
+2. Go to [vercel.com](https://vercel.com) → **Add New Project**
+3. Import the GitHub repository
+4. Leave all settings as default (Vercel auto-detects Next.js)
+5. Click **Deploy**
 
-To learn more about Next.js, take a look at the following resources:
+No environment variables are required for the MVP.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📁 Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+app/
+├── layout.tsx        # Root layout, fonts, SEO metadata
+├── page.tsx          # Main page (assembles all sections)
+└── globals.css       # Tailwind v4 design system + brand tokens
+components/
+├── Navbar.tsx
+├── HeroSection.tsx
+├── AboutSection.tsx
+├── ProductsSection.tsx
+├── WhyChooseUs.tsx
+├── DemoBasket.tsx
+├── Testimonials.tsx
+├── StockistForm.tsx
+└── Footer.tsx
+lib/
+└── products.ts       # Product data (name, price, spice level)
+public/
+└── images/           # AI-generated food photography
+```
 
-## Deploy on Vercel
+## 🔮 Next Steps (Post-MVP)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Connect stockist form to an email service (e.g. [Resend](https://resend.com))
+- Add real WhatsApp number to `components/DemoBasket.tsx` (`wa.me/44XXXXXXXXXX`)
+- Integrate Stripe payments to enable the "Pay Now" button
+- Add product photography with real images
+- Set up Google Analytics or Vercel Analytics
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📝 License
+
+Private — all rights reserved by PattySource.
