@@ -53,13 +53,13 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="relative w-52 h-16">
+              <div className="relative w-72 h-22">
                 <Image
                   src="/images/pattysource-logo.png"
                   alt="PattySource"
                   fill
                   className="object-contain object-left"
-                  sizes="160px"
+                  sizes="288px"
                 />
               </div>
             </div>
