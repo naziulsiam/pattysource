@@ -65,7 +65,7 @@ export default function HeroSection() {
       <div className="absolute bottom-0 left-0 right-0 h-px bg-[#D4930A]/40" />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 lg:pt-40 pb-20">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 lg:pt-44 pb-20">
         <motion.div
           variants={container}
           initial="hidden"

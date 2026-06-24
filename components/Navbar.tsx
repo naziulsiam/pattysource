@@ -41,21 +41,21 @@ export default function Navbar() {
         style={{ willChange: "transform" }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-[88px] lg:h-28">
+          <div className="flex items-center justify-between h-[104px] lg:h-32">
             {/* Logo */}
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className="flex items-center gap-2 group cursor-pointer shrink-0"
               aria-label="PattySource home"
             >
-              <div className="relative w-52 h-16 lg:w-72 lg:h-22">
+              <div className="relative w-60 h-20 lg:w-80 lg:h-26">
                 <Image
                   src="/images/pattysource-logo.png"
                   alt="PattySource — Your Wholesale Patty Partner"
                   fill
                   className="object-contain object-left"
                   priority
-                  sizes="288px"
+                  sizes="320px"
                 />
               </div>
             </button>
@@ -118,7 +118,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.25 }}
-            className="fixed top-[88px] left-0 right-0 z-40 bg-[#1C1209]/98 backdrop-blur-md border-t border-[#D4930A]/20 lg:hidden"
+            className="fixed top-[104px] left-0 right-0 z-40 bg-[#1C1209]/98 backdrop-blur-md border-t border-[#D4930A]/20 lg:hidden"
           >
             <div className="max-w-7xl mx-auto px-4 py-6 space-y-1">
               {navLinks.map((link, i) => (
