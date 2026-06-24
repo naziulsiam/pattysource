@@ -9,7 +9,7 @@ type Basket = Record<string, BasketItem>;
 
 export default function DemoBasket() {
   const [basket, setBasket] = useState<Basket>({});
-  const [showBasket, setShowBasket] = useState(false);
+  const [mobileBasketOpen, setMobileBasketOpen] = useState(false);
 
   const updateQty = useCallback((id: string, delta: number) => {
     setBasket((prev) => {
@@ -39,6 +39,132 @@ export default function DemoBasket() {
     `Hi PattySource! I'd like a wholesale quote for:\n${basketItems
       .map((i) => `- ${i.name} x${i.quantity}`)
       .join("\n")}\nTotal units: ${totalUnits}\nPlease get in touch.`
+  );
+
+  const renderBasketContent = () => (
+    <>
+      <div className="flex items-center justify-between mb-5">
+        <h3 className="font-display text-xl font-bold text-[#1C1209]">
+          Your Basket
+        </h3>
+        {totalUnits > 0 && (
+          <motion.span
+            key={totalUnits}
+            initial={{ scale: 1.3 }}
+            animate={{ scale: 1 }}
+            className="bg-[#D4930A] text-white text-xs font-bold px-2.5 py-1 rounded-full"
+          >
+            {totalUnits} units
+          </motion.span>
+        )}
+      </div>
+
+      {/* Items */}
+      <div className="min-h-[100px]">
+        <AnimatePresence>
+          {basketItems.length === 0 ? (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-[#5C3317]/40 text-sm text-center py-8"
+            >
+              Your basket is empty. Add products to get started.
+            </motion.p>
+          ) : (
+            <div className="space-y-3">
+              {basketItems.map((item) => (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.25 }}
+                  className="flex justify-between text-sm"
+                >
+                  <span className="text-[#5C3317]">
+                    {item.name}{" "}
+                    <span className="text-[#5C3317]/50">×{item.quantity}</span>
+                  </span>
+                  <span className="font-semibold text-[#1C1209]">
+                    £{(item.unitPrice * item.quantity).toFixed(2)}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Subtotal */}
+      {basketItems.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="border-t border-[#E8D5B0] mt-4 pt-4"
+        >
+          <div className="flex justify-between font-bold text-[#1C1209]">
+            <span>Estimated Subtotal</span>
+            <span>£{subtotal.toFixed(2)}</span>
+          </div>
+          <p className="text-[#5C3317]/50 text-xs mt-1">
+            Final quote provided after enquiry
+          </p>
+        </motion.div>
+      )}
+
+      <div className="space-y-3 mt-6">
+        {/* Disabled Pay Now */}
+        <div className="relative">
+          <button
+            id="pay-now-button"
+            disabled
+            className="w-full bg-[#5C3317]/20 text-[#5C3317]/40 font-semibold py-3 rounded-xl cursor-not-allowed text-sm"
+            aria-disabled="true"
+          >
+            Pay Now
+          </button>
+          <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-[#2D5016] text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full whitespace-nowrap">
+            Online payment coming soon
+          </span>
+        </div>
+
+        {/* WhatsApp */}
+        <a
+          id="whatsapp-cta"
+          href={
+            basketItems.length
+              ? `https://wa.me/447700000000?text=${whatsappMessage}`
+              : "#"
+          }
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`flex items-center justify-center gap-2 w-full font-semibold py-3 rounded-xl text-sm transition-all duration-200 ${
+            basketItems.length
+              ? "bg-[#25D366] hover:bg-[#1ebe5a] text-white shadow-md hover:shadow-lg cursor-pointer active:scale-95"
+              : "bg-[#25D366]/30 text-white/40 cursor-not-allowed"
+          }`}
+          onClick={(e) => !basketItems.length && e.preventDefault()}
+        >
+          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.49" />
+          </svg>
+          Request Quote via WhatsApp
+        </a>
+
+        {/* Contact Sales */}
+        <button
+          id="contact-sales-button"
+          onClick={() =>
+            document
+              .querySelector("#stockist")
+              ?.scrollIntoView({ behavior: "smooth" })
+          }
+          className="w-full border border-[#D4930A]/40 hover:border-[#D4930A] text-[#D4930A] font-semibold py-3 rounded-xl text-sm transition-all duration-200 cursor-pointer active:scale-95"
+        >
+          Contact Sales Team
+        </button>
+      </div>
+    </>
   );
 
   return (
@@ -108,18 +234,24 @@ export default function DemoBasket() {
                   <button
                     id={`decrease-${product.id}`}
                     onClick={() => updateQty(product.id, -1)}
-                    className="w-8 h-8 rounded-full border border-[#E8D5B0] hover:border-[#D4930A] text-[#5C3317] hover:text-[#D4930A] flex items-center justify-center text-lg font-medium transition-colors cursor-pointer"
+                    className="w-9 h-9 rounded-full border border-[#E8D5B0] hover:border-[#D4930A] text-[#5C3317] hover:text-[#D4930A] flex items-center justify-center text-lg font-medium transition-colors cursor-pointer active:scale-90"
                     aria-label={`Decrease ${product.name}`}
                   >
                     −
                   </button>
-                  <span className="w-8 text-center font-bold text-[#1C1209] text-sm">
+                  <motion.span
+                    key={basket[product.id]?.quantity ?? 0}
+                    initial={{ scale: 1.4 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.15 }}
+                    className="w-8 text-center font-bold text-[#1C1209] text-sm"
+                  >
                     {basket[product.id]?.quantity ?? 0}
-                  </span>
+                  </motion.span>
                   <button
                     id={`increase-${product.id}`}
                     onClick={() => updateQty(product.id, 1)}
-                    className="w-8 h-8 rounded-full bg-[#D4930A] hover:bg-[#F5B731] text-white flex items-center justify-center text-lg font-medium transition-colors cursor-pointer"
+                    className="w-9 h-9 rounded-full bg-[#D4930A] hover:bg-[#F5B731] text-white flex items-center justify-center text-lg font-medium transition-colors cursor-pointer active:scale-90"
                     aria-label={`Increase ${product.name}`}
                   >
                     +
@@ -129,127 +261,87 @@ export default function DemoBasket() {
             ))}
           </div>
 
-          {/* Basket summary */}
+          {/* Basket summary — desktop only sidebar */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="lg:col-span-2 bg-white border border-[#E8D5B0] rounded-2xl p-6 shadow-md sticky top-24"
+            className="hidden lg:block lg:col-span-2 bg-white border border-[#E8D5B0] rounded-2xl p-6 shadow-md sticky top-28"
           >
-            <div className="flex items-center justify-between mb-5">
-              <h3 className="font-display text-xl font-bold text-[#1C1209]">
-                Your Basket
-              </h3>
-              {totalUnits > 0 && (
-                <span className="bg-[#D4930A] text-white text-xs font-bold px-2.5 py-1 rounded-full">
-                  {totalUnits} units
-                </span>
-              )}
-            </div>
-
-            {/* Items */}
-            <div className="min-h-[120px]">
-              <AnimatePresence>
-                {basketItems.length === 0 ? (
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="text-[#5C3317]/40 text-sm text-center py-8"
-                  >
-                    Your basket is empty. Add products to get started.
-                  </motion.p>
-                ) : (
-                  <div className="space-y-3">
-                    {basketItems.map((item) => (
-                      <motion.div
-                        key={item.id}
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="flex justify-between text-sm"
-                      >
-                        <span className="text-[#5C3317]">
-                          {item.name}{" "}
-                          <span className="text-[#5C3317]/50">
-                            ×{item.quantity}
-                          </span>
-                        </span>
-                        <span className="font-semibold text-[#1C1209]">
-                          £{(item.unitPrice * item.quantity).toFixed(2)}
-                        </span>
-                      </motion.div>
-                    ))}
-                  </div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* Subtotal */}
-            {basketItems.length > 0 && (
-              <div className="border-t border-[#E8D5B0] mt-4 pt-4">
-                <div className="flex justify-between font-bold text-[#1C1209]">
-                  <span>Estimated Subtotal</span>
-                  <span>£{subtotal.toFixed(2)}</span>
-                </div>
-                <p className="text-[#5C3317]/50 text-xs mt-1">
-                  Final quote provided after enquiry
-                </p>
-              </div>
-            )}
-
-            <div className="space-y-3 mt-6">
-              {/* Disabled Pay Now */}
-              <div className="relative">
-                <button
-                  id="pay-now-button"
-                  disabled
-                  className="w-full bg-[#5C3317]/20 text-[#5C3317]/40 font-semibold py-3 rounded-xl cursor-not-allowed text-sm"
-                  aria-disabled="true"
-                >
-                  Pay Now
-                </button>
-                <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-[#2D5016] text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full whitespace-nowrap">
-                  Online payment coming soon
-                </span>
-              </div>
-
-              {/* WhatsApp */}
-              <a
-                id="whatsapp-cta"
-                href={
-                  basketItems.length
-                    ? `https://wa.me/447700000000?text=${whatsappMessage}`
-                    : "#"
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`flex items-center justify-center gap-2 w-full font-semibold py-3 rounded-xl text-sm transition-all duration-200 ${
-                  basketItems.length
-                    ? "bg-[#25D366] hover:bg-[#1ebe5a] text-white shadow-md hover:shadow-lg cursor-pointer"
-                    : "bg-[#25D366]/30 text-white/40 cursor-not-allowed"
-                }`}
-                onClick={(e) => !basketItems.length && e.preventDefault()}
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.49" />
-                </svg>
-                Request Quote via WhatsApp
-              </a>
-
-              {/* Contact Sales */}
-              <button
-                id="contact-sales-button"
-                onClick={() =>
-                  document.querySelector("#stockist")?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="w-full border border-[#D4930A]/40 hover:border-[#D4930A] text-[#D4930A] font-semibold py-3 rounded-xl text-sm transition-all duration-200 cursor-pointer"
-              >
-                Contact Sales Team
-              </button>
-            </div>
+            {renderBasketContent()}
           </motion.div>
         </div>
+
+        {/* Mobile basket — fixed bottom bar */}
+        <div className="lg:hidden">
+          <AnimatePresence>
+            {totalUnits > 0 && (
+              <motion.div
+                initial={{ y: 100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 100, opacity: 0 }}
+                transition={{ type: "spring", stiffness: 400, damping: 40 }}
+                className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-white border-t border-[#E8D5B0] shadow-2xl"
+              >
+                <button
+                  onClick={() => setMobileBasketOpen(true)}
+                  className="w-full flex items-center justify-between bg-[#D4930A] text-white font-semibold py-3.5 px-5 rounded-2xl cursor-pointer active:scale-95 transition-transform"
+                >
+                  <span className="flex items-center gap-2">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    View Basket
+                  </span>
+                  <span className="bg-white text-[#D4930A] text-xs font-bold px-2.5 py-1 rounded-full">
+                    {totalUnits} units · £{subtotal.toFixed(2)}
+                  </span>
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Mobile basket drawer */}
+          <AnimatePresence>
+            {mobileBasketOpen && (
+              <>
+                {/* Backdrop */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setMobileBasketOpen(false)}
+                  className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+                />
+                {/* Drawer */}
+                <motion.div
+                  initial={{ y: "100%" }}
+                  animate={{ y: 0 }}
+                  exit={{ y: "100%" }}
+                  transition={{ type: "spring", stiffness: 350, damping: 40 }}
+                  className="fixed bottom-0 left-0 right-0 z-50 bg-white rounded-t-3xl p-6 max-h-[85vh] overflow-y-auto shadow-2xl"
+                >
+                  {/* Drawer handle */}
+                  <div className="w-10 h-1 bg-[#E8D5B0] rounded-full mx-auto mb-6" />
+                  <button
+                    onClick={() => setMobileBasketOpen(false)}
+                    className="absolute top-4 right-4 w-9 h-9 flex items-center justify-center rounded-full bg-[#F0E6D0] text-[#5C3317] cursor-pointer"
+                    aria-label="Close basket"
+                  >
+                    ✕
+                  </button>
+                  {renderBasketContent()}
+                  {/* Extra padding for safe area */}
+                  <div className="h-4" />
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Spacer so content isn't hidden behind mobile bar */}
+        {totalUnits > 0 && <div className="h-24 lg:hidden" />}
       </div>
     </section>
   );

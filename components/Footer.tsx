@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Image from "next/image";
 
 const quickLinks = [
   { label: "About Us", href: "#about" },
@@ -49,16 +49,19 @@ export default function Footer() {
     <footer className="bg-[#1C1209] border-t border-[#D4930A]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main footer content */}
-        <div className="py-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="py-14 lg:py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 bg-[#D4930A] rounded-full flex items-center justify-center text-white font-bold font-display">
-                P
+              <div className="relative w-52 h-16">
+                <Image
+                  src="/images/pattysource-logo.png"
+                  alt="PattySource"
+                  fill
+                  className="object-contain object-left"
+                  sizes="160px"
+                />
               </div>
-              <span className="font-display text-2xl font-bold text-white">
-                Patty<span className="text-[#F5B731]">Source</span>
-              </span>
             </div>
             <p className="text-white/50 text-sm leading-relaxed max-w-xs">
               Bringing authentic Caribbean flavours to businesses across the UK.

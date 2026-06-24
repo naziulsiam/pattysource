@@ -84,7 +84,7 @@ export default function Testimonials() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -60 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
-                className="p-8 sm:p-12"
+                className="p-6 sm:p-10 lg:p-12"
               >
                 {/* Stars */}
                 <div className="flex gap-1 mb-6">
@@ -94,7 +94,7 @@ export default function Testimonials() {
                 </div>
 
                 {/* Quote */}
-                <blockquote className="font-display text-xl sm:text-2xl text-[#1C1209] leading-relaxed mb-8">
+                <blockquote className="font-display text-lg sm:text-xl lg:text-2xl text-[#1C1209] leading-relaxed mb-7">
                   &ldquo;{testimonials[active].quote}&rdquo;
                 </blockquote>
 
@@ -122,7 +122,7 @@ export default function Testimonials() {
             </AnimatePresence>
 
             {/* Accent bar */}
-            <div className="h-1.5 bg-gradient-to-r from-[#D4930A] to-[#F5B731]" />
+            <div className="h-1.5 bg-[#D4930A]" />
           </div>
 
           {/* Controls */}
@@ -135,22 +135,22 @@ export default function Testimonials() {
                   id={`testimonial-dot-${i}`}
                   onClick={() => setActive(i)}
                   aria-label={`Go to testimonial ${i + 1}`}
-                  className={`rounded-full transition-all duration-300 cursor-pointer ${
-                    i === active
-                      ? "w-8 h-2.5 bg-[#D4930A]"
-                      : "w-2.5 h-2.5 bg-[#D4930A]/30"
-                  }`}
+                className={`rounded-full border-2 transition-all duration-200 cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center ${
+                  i === active
+                    ? "w-8 h-3 bg-[#D4930A] border-[#D4930A]"
+                    : "w-3 h-3 bg-transparent border-[#D4930A]/40 hover:border-[#D4930A]"
+                }`}
                 />
               ))}
             </div>
 
             {/* Prev / Next */}
-            <div className="flex gap-2">
+              <div className="flex gap-3">
               <button
                 id="testimonial-prev"
                 onClick={prev}
                 aria-label="Previous testimonial"
-                className="w-10 h-10 rounded-full border border-[#D4930A]/30 hover:border-[#D4930A] hover:bg-[#D4930A] hover:text-white text-[#5C3317] flex items-center justify-center transition-all duration-200 cursor-pointer"
+                className="w-11 h-11 rounded-full border border-[#D4930A]/30 hover:border-[#D4930A] hover:bg-[#D4930A] hover:text-white text-[#5C3317] flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-90"
               >
                 ←
               </button>
@@ -158,7 +158,7 @@ export default function Testimonials() {
                 id="testimonial-next"
                 onClick={next}
                 aria-label="Next testimonial"
-                className="w-10 h-10 rounded-full border border-[#D4930A]/30 hover:border-[#D4930A] hover:bg-[#D4930A] hover:text-white text-[#5C3317] flex items-center justify-center transition-all duration-200 cursor-pointer"
+                className="w-11 h-11 rounded-full border border-[#D4930A]/30 hover:border-[#D4930A] hover:bg-[#D4930A] hover:text-white text-[#5C3317] flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-90"
               >
                 →
               </button>

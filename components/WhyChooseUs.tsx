@@ -48,12 +48,13 @@ export default function WhyChooseUs() {
       className="py-20 lg:py-28 bg-[#1C1209] relative overflow-hidden"
       aria-labelledby="why-us-heading"
     >
-      {/* Subtle warm texture overlay */}
+      {/* Subtle dot pattern overlay */}
       <div
-        className="absolute inset-0 opacity-5"
+        className="absolute inset-0 opacity-[0.04]"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 25% 25%, #D4930A 0%, transparent 50%), radial-gradient(circle at 75% 75%, #2D5016 0%, transparent 50%)",
+            "radial-gradient(circle, #D4930A 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
         }}
       />
 
@@ -82,12 +83,12 @@ export default function WhyChooseUs() {
           </h2>
           <p className="text-white/50 mt-4 max-w-xl mx-auto text-lg">
             We understand what busy hospitality and retail businesses need.
-            Here's why our stockists keep coming back.
+            Here&apos;s why our stockists keep coming back.
           </p>
         </motion.div>
 
         {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {reasons.map((reason, i) => (
             <motion.div
               key={reason.title}
@@ -118,10 +119,10 @@ export default function WhyChooseUs() {
           className="mt-14 border border-[#D4930A]/20 rounded-2xl p-8 text-center"
         >
           <p className="text-[#F5B731] font-display text-2xl font-bold mb-2">
-            "This looks like a supplier I can trust."
+            &quot;This looks like a supplier I can trust.&quot;
           </p>
           <p className="text-white/50 text-sm">
-            That's the first impression we aim to make — every single time.
+            That&apos;s the first impression we aim to make — every single time.
           </p>
         </motion.div>
       </div>

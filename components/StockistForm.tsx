@@ -60,12 +60,13 @@ export default function StockistForm() {
       className="py-20 lg:py-28 bg-[#2D5016] relative overflow-hidden"
       aria-labelledby="stockist-heading"
     >
-      {/* Subtle texture */}
+      {/* Subtle warm pattern */}
       <div
-        className="absolute inset-0 opacity-10"
+        className="absolute inset-0 opacity-[0.06]"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 80% 20%, #F5B731 0%, transparent 50%)",
+            "repeating-linear-gradient(45deg, #F5B731 0, #F5B731 1px, transparent 0, transparent 50%)",
+          backgroundSize: "20px 20px",
         }}
       />
 
@@ -135,7 +136,7 @@ export default function StockistForm() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 onSubmit={handleSubmit}
-                className="grid sm:grid-cols-2 gap-6"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6"
               >
                 {/* Business Name */}
                 <div className="sm:col-span-2 sm:grid sm:grid-cols-2 gap-6">

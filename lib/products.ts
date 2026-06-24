@@ -3,7 +3,7 @@ export interface Product {
   name: string;
   description: string;
   image: string;
-  spiceLevel: number; // 1–5
+  spiceLevel: number; // 0–5
   spiceLabel: string;
   tags: string[];
   unitPrice: number;
@@ -19,7 +19,18 @@ export const products: Product[] = [
     spiceLevel: 2,
     spiceLabel: "Mild",
     tags: ["Bestseller", "Halal available"],
-    unitPrice: 1.85,
+    unitPrice: 1.79,
+  },
+  {
+    id: "cheesy-beef",
+    name: "Cheesy Beef Patty",
+    description:
+      "All the bold flavour of our classic beef patty with a generous layer of melted cheese — rich, indulgent, and absolutely irresistible.",
+    image: "/images/cheese.png",
+    spiceLevel: 2,
+    spiceLabel: "Mild",
+    tags: ["Popular", "Halal available"],
+    unitPrice: 1.89,
   },
   {
     id: "chicken",
@@ -30,18 +41,7 @@ export const products: Product[] = [
     spiceLevel: 1,
     spiceLabel: "Mild",
     tags: ["Popular", "Halal"],
-    unitPrice: 1.85,
-  },
-  {
-    id: "vegetable",
-    name: "Vegetable Patty",
-    description:
-      "A vibrant mix of sweet potato, corn, peppers, and Caribbean herbs — hearty, wholesome, and entirely plant-based.",
-    image: "/images/vegetable.png",
-    spiceLevel: 1,
-    spiceLabel: "Mild",
-    tags: ["Vegan", "Plant-based"],
-    unitPrice: 1.75,
+    unitPrice: 1.79,
   },
   {
     id: "jerk-chicken",
@@ -52,17 +52,28 @@ export const products: Product[] = [
     spiceLevel: 4,
     spiceLabel: "Hot",
     tags: ["Spicy", "Halal"],
-    unitPrice: 1.95,
+    unitPrice: 1.89,
   },
   {
-    id: "cheese",
-    name: "Cheese Patty",
+    id: "lamb",
+    name: "Lamb Patty",
     description:
-      "Molten cheese nestled inside a buttery, golden pastry — rich, indulgent, and irresistibly crowd-pleasing.",
-    image: "/images/cheese.png",
-    spiceLevel: 0,
-    spiceLabel: "No heat",
-    tags: ["Crowd favourite", "Vegetarian"],
-    unitPrice: 1.80,
+      "Slow-seasoned minced lamb with aromatic Caribbean herbs and warm spices, encased in a perfectly golden, flaky pastry shell.",
+    image: "/images/lamb.png",
+    spiceLevel: 2,
+    spiceLabel: "Mild",
+    tags: ["Halal", "Premium"],
+    unitPrice: 1.79,
+  },
+  {
+    id: "veg",
+    name: "Veg Patty",
+    description:
+      "A vibrant mix of sweet potato, corn, peppers, and Caribbean herbs — hearty, wholesome, and entirely plant-based.",
+    image: "/images/vegetable.png",
+    spiceLevel: 1,
+    spiceLabel: "Mild",
+    tags: ["Vegan", "Plant-based"],
+    unitPrice: 1.79,
   },
 ];

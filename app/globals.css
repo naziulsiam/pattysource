@@ -125,3 +125,28 @@ body {
 input:focus, select:focus, textarea:focus {
   outline: none;
 }
+
+/* ============================================
+   MOBILE OPTIMISATIONS
+   ============================================ */
+
+/* Ensure tap targets are large enough on mobile */
+button, a, [role="button"] {
+  touch-action: manipulation;
+}
+
+/* Prevent font size scaling on iOS rotation */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Smooth scroll on iOS */
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Better image rendering */
+img {
+  max-width: 100%;
+  height: auto;
+}

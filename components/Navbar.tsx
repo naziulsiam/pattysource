@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
@@ -34,25 +35,29 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-[#1C1209]/95 backdrop-blur-md shadow-lg shadow-black/20"
+            ? "bg-[#1C1209]/96 backdrop-blur-md shadow-lg shadow-black/20"
             : "bg-transparent"
         }`}
         style={{ willChange: "transform" }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-20">
+          <div className="flex items-center justify-between h-[72px] lg:h-24">
             {/* Logo */}
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="flex items-center gap-2 group cursor-pointer"
+              className="flex items-center gap-2 group cursor-pointer shrink-0"
               aria-label="PattySource home"
             >
-              <div className="w-8 h-8 bg-[#D4930A] rounded-full flex items-center justify-center text-white font-bold text-sm font-display shrink-0">
-                P
+              <div className="relative w-44 h-14">
+                <Image
+                  src="/images/pattysource-logo.png"
+                  alt="PattySource — Your Wholesale Patty Partner"
+                  fill
+                  className="object-contain object-left"
+                  priority
+                  sizes="176px"
+                />
               </div>
-              <span className="font-display text-xl font-bold text-white">
-                Patty<span className="text-[#F5B731]">Source</span>
-              </span>
             </button>
 
             {/* Desktop Nav */}
@@ -72,7 +77,7 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center gap-3">
               <button
                 onClick={() => scrollTo("#stockist")}
-                className="bg-[#D4930A] hover:bg-[#F5B731] text-white hover:text-[#1C1209] font-semibold text-sm px-5 py-2.5 rounded-full transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer"
+                className="bg-[#D4930A] hover:bg-[#F5B731] text-white hover:text-[#1C1209] font-semibold text-sm px-5 py-2.5 rounded-full transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer whitespace-nowrap"
               >
                 Become a Stockist
               </button>
@@ -113,9 +118,9 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.25 }}
-            className="fixed top-16 left-0 right-0 z-40 bg-[#1C1209]/98 backdrop-blur-md border-t border-[#D4930A]/20 lg:hidden"
+            className="fixed top-[72px] left-0 right-0 z-40 bg-[#1C1209]/98 backdrop-blur-md border-t border-[#D4930A]/20 lg:hidden"
           >
-            <div className="max-w-7xl mx-auto px-4 py-6 space-y-3">
+            <div className="max-w-7xl mx-auto px-4 py-6 space-y-1">
               {navLinks.map((link, i) => (
                 <motion.button
                   key={link.href}
@@ -123,7 +128,7 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.06 }}
                   onClick={() => scrollTo(link.href)}
-                  className="block w-full text-left text-white/80 hover:text-[#F5B731] font-medium py-2 transition-colors cursor-pointer"
+                  className="block w-full text-left text-white/80 hover:text-[#F5B731] font-medium py-3 px-2 rounded-lg hover:bg-white/5 transition-all cursor-pointer"
                 >
                   {link.label}
                 </motion.button>

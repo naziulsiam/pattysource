@@ -25,7 +25,7 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="py-20 lg:py-28 bg-[#FAF5EB]"
+      className="py-16 lg:py-28 bg-[#FAF5EB]"
       aria-labelledby="about-heading"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -98,7 +98,7 @@ export default function AboutSection() {
             </p>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 border-t border-[#D4930A]/20 pt-8">
+            <div className="grid grid-cols-3 gap-4 sm:gap-6 border-t border-[#D4930A]/20 pt-8">
               {stats.map((stat, i) => (
                 <motion.div
                   key={stat.label}
